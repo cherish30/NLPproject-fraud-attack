@@ -1,0 +1,16 @@
+# virtual envs
+.env
+.venv
+__pycache__/
+*.pyc
+
+# logs and outputs (keep directories only)
+logs/*
+outputs/*
+!logs/.gitkeep
+!outputs/.gitkeep
+
+# caches
+src/.cache
+.cache
+
