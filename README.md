@@ -128,14 +128,20 @@ nohup python -u bin/exp1_robustness.py \
 
 ---
 
-## 6. 实验三：分桶分析（可选）
-`exp3_analysis.py` 需要带 `pred` 的 clean/adv 预测文件：
-- 可用 `victim_llm.py` 或 `victim_bert.py` 先得到 `pred` 列。
-- 运行示例：按 `interaction_strategy` 分桶 ASR
+## 6. 实验三：分桶分析（已封装脚本）
+LLM 分析直接用现成脚本 `bin/run_llm_exp3.sh`，一步完成：
+1) 生成带 `pred` 的 clean/adv 预测文件（四份 adv：word/sent × few-shot）。  
+2) 调用 `exp3_analysis.py --bucket interaction_strategy` 统计各策略 ASR，输出 `outputs/results_exp3_llm_adv_*.csv`。
+
+执行：
+```bash
+bash bin/run_llm_exp3.sh
+```
+如需 BERT/BERT_BASE，同理先用 `victim_bert.py` 生成 `*_pred_bert*.csv`，再手动调用：
 ```bash
 python bin/exp3_analysis.py \
-  --clean outputs/clean_pred.csv \
-  --adv outputs/adv_sent_0_pred.csv \
+  --clean outputs/clean_pred_bert.csv \
+  --adv outputs/adv_sent_0_pred_bert.csv \
   --bucket interaction_strategy \
-  --output outputs/results_exp3.csv
+  --output outputs/results_exp3_bert.csv
 ```
